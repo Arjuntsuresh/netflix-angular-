@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { ApiResponse } from '../shared/types/movieInterface';
 @Injectable({
   providedIn: 'root'
 })
@@ -14,14 +15,14 @@ export class MovieApiServiceService {
 
   //bannerapidata
 
-  bannerApiData(): Observable<any> {
-    return this.http.get(`${this.baseurl}/trending/all/week?api_key=${this.apikey}`);
+  bannerApiData(): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(`${this.baseurl}/trending/all/week?api_key=${this.apikey}`);
   }
 
 
   // trendingmovieapidata 
-  trendingMovieApiData(): Observable<any> {
-    return this.http.get(`${this.baseurl}/trending/movie/day?api_key=${this.apikey}`);
+  trendingMovieApiData(): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(`${this.baseurl}/trending/movie/day?api_key=${this.apikey}`);
   }
 
   // searchmovive

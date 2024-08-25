@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MovieApiServiceService } from 'src/app/service/movie-api-service.service';
 import { Title,Meta } from '@angular/platform-browser';
+import { IMovieDetails, IMovieVideoClip } from 'src/app/shared/types/movieInterface';
 
 @Component({
   selector: 'app-movie-details',
@@ -12,11 +13,11 @@ export class MovieDetailsComponent implements OnInit {
   
 
   constructor(private service:MovieApiServiceService,private router:ActivatedRoute,private title:Title,private meta:Meta) { }
-  getMovieDetailResult:any;
-  getMovieVideoResult:any;
+  getMovieDetailResult!:IMovieDetails;
+  getMovieVideoResult!:IMovieVideoClip;
   getMovieCastResult:any;
   ngOnInit(): void {
-    let getParamId = this.router.snapshot.paramMap.get('id');
+    let getParamId = this.router.snapshot.paramMap.get('id') as string;
     console.log(getParamId,'getparamid#');
   
     this.getMovie(getParamId);
@@ -25,7 +26,7 @@ export class MovieDetailsComponent implements OnInit {
   }
 
 
-  getMovie(id:any){
+  getMovie(id:string){
     this.service.getMovieDetails(id).subscribe(async(result)=>{
         console.log(result,'getmoviedetails#');
         this.getMovieDetailResult = await result;
@@ -45,7 +46,7 @@ export class MovieDetailsComponent implements OnInit {
     });
   }
 
-  getVideo(id:any)
+  getVideo(id:string)
   {
     this.service.getMovieVideo(id).subscribe((result)=>{
         console.log(result,'getMovieVideo#');
@@ -59,7 +60,7 @@ export class MovieDetailsComponent implements OnInit {
     });
   }
 
-  getMovieCast(id:any)
+  getMovieCast(id:string)
   {
     this.service.getMovieCast(id).subscribe((result)=>{
       console.log(result,'movieCast#');

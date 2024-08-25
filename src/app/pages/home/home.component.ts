@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MovieApiServiceService } from 'src/app/service/movie-api-service.service';
 import { Title,Meta } from '@angular/platform-browser';
+import { ApiResponse, IMovie, ImovieAPI } from 'src/app/shared/types/movieInterface';
 
 @Component({
   selector: 'app-home',
@@ -15,15 +16,15 @@ export class HomeComponent implements OnInit {
     
    }
 
-  bannerResult: any = [];
-  trendingMovieResult: any = [];
-  actionMovieResult: any = [];
-  adventureMovieResult: any = [];
-  animationMovieResult: any = [];
-  comedyMovieResult: any = [];
-  documentaryMovieResult: any = [];
-  sciencefictionMovieResult: any = [];
-  thrillerMovieResult: any = [];
+  bannerResult: ImovieAPI[] = [];
+  trendingMovieResult:IMovie[]  = [];
+  actionMovieResult: IMovie[] = [];
+  adventureMovieResult: IMovie[] = [];
+  animationMovieResult: IMovie[] = [];
+  comedyMovieResult: IMovie[] = [];
+  documentaryMovieResult: IMovie[] = [];
+  sciencefictionMovieResult: IMovie[] = [];
+  thrillerMovieResult: IMovie[] = [];
 
   ngOnInit(): void {
     this.bannerData();
@@ -40,14 +41,14 @@ export class HomeComponent implements OnInit {
 
   // bannerdata
   bannerData() {
-    this.service.bannerApiData().subscribe((result) => {
+    this.service.bannerApiData().subscribe((result:ApiResponse) => {
       console.log(result, 'bannerresult#');
       this.bannerResult = result.results;
     });
   }
 
   trendingData() {
-    this.service.trendingMovieApiData().subscribe((result) => {
+    this.service.trendingMovieApiData().subscribe((result:ApiResponse) => {
       console.log(result, 'trendingresult#');
       this.trendingMovieResult = result.results;
       // this.trendingMovieResult
@@ -56,7 +57,7 @@ export class HomeComponent implements OnInit {
 
   // action 
   actionMovie() {
-    this.service.fetchActionMovies().subscribe((result) => {
+    this.service.fetchActionMovies().subscribe((result:ApiResponse) => {
       this.actionMovieResult = result.results;
     });
   }
@@ -66,7 +67,7 @@ export class HomeComponent implements OnInit {
 
   // adventure 
   adventureMovie() {
-    this.service.fetchAdventureMovies().subscribe((result) => {
+    this.service.fetchAdventureMovies().subscribe((result:ApiResponse) => {
       this.adventureMovieResult = result.results;
     });
   }
@@ -74,7 +75,7 @@ export class HomeComponent implements OnInit {
 
   // animation 
   animationMovie() {
-    this.service.fetchAnimationMovies().subscribe((result) => {
+    this.service.fetchAnimationMovies().subscribe((result:ApiResponse) => {
       this.animationMovieResult = result.results;
     });
   }
@@ -82,14 +83,14 @@ export class HomeComponent implements OnInit {
 
   // comedy 
   comedyMovie() {
-    this.service.fetchComedyMovies().subscribe((result) => {
+    this.service.fetchComedyMovies().subscribe((result:ApiResponse) => {
       this.comedyMovieResult = result.results;
     });
   }
 
   // documentary 
   documentaryMovie() {
-    this.service.fetchDocumentaryMovies().subscribe((result) => {
+    this.service.fetchDocumentaryMovies().subscribe((result:ApiResponse) => {
       this.documentaryMovieResult = result.results;
     });
   }
@@ -97,14 +98,14 @@ export class HomeComponent implements OnInit {
 
   // science-fiction 
   sciencefictionMovie() {
-    this.service.fetchScienceFictionMovies().subscribe((result) => {
+    this.service.fetchScienceFictionMovies().subscribe((result:ApiResponse) => {
       this.sciencefictionMovieResult = result.results;
     });
   }
 
   // thriller
   thrillerMovie() {
-    this.service.fetchThrillerMovies().subscribe((result) => {
+    this.service.fetchThrillerMovies().subscribe((result:ApiResponse) => {
       this.thrillerMovieResult = result.results;
     });
   }
